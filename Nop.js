@@ -36,7 +36,6 @@ export class Nop {
     const STATE_COMMENT_MULTI = 5;
     const STATE_COMMENT_MULTI2 = 6;
     const STATE_NUMBER = 7;
-    const STATE_OPERATOR = 8;
     let state = STATE_FIRST;
     const res = [];
     const pos = this.p;
@@ -123,14 +122,6 @@ export class Nop {
           this.p--;
           const w = res.join("");
           return { pos, type: "num", value: parseFloat(w) };
-        }
-      } else if (state == STATE_OPERATOR) {
-        if (isOperator(c)) {
-          res.push(c);
-        } else {
-          this.p--;
-          const w = res.join("");
-          return { pos, type: "operator", operator: w };
         }
       }
     }
