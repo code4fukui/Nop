@@ -1,11 +1,11 @@
 ﻿fn,title
-nor.nor,1. nor
-not.nor,2. not
-or.nor,3. or
-and.nor,4. and
-halfadd.nor,5. half add
-fulladd.nor,6. full add
-array.nor,7. array
-add.nor,8. 4bit add
-sub.nor,9. 4bit sub
-mul.nor,10. 4bit mul
+print.nop,1. print
+not.nop,2. not
+or.nop,3. or
+and.nop,4. and
+halfadd.nop,5. half add
+fulladd.nop,6. full add
+array.nop,7. array
+add.nop,8. 4bit add
+sub.nop,9. 4bit sub
+mul.nop,10. 4bit mul

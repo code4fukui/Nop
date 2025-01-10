@@ -1,14 +1,29 @@
 # 9. 4bit sub
 function not(a)
-  return a nor a
+  if a
+    return 0
+  else
+    return 1
+  endif
 end
 
 function or(a, b)
-  return not(a nor b)
+  if a
+    return 1
+  elseif b
+    return 1
+  else
+    return 0
+  endif
 end
 
 function and(a, b)
-  return not(a) nor not(b)
+  if a
+    if b
+      return 1
+    endif
+  endif
+  return 0
 end
 
 function halfadd(a, b)

@@ -1,32 +1,32 @@
-# Nor - a one-operator programming language
+# Nop - no operators programming language
 
-![Nor logo](nor-logo.svg)
+![Nop logo](nop-logo.svg)
 
 [English](README.md) / [日本語](README_ja.md)
 
-Nor is structured programming language with only operator "nor". (forked [Wirth](https://github.com/code4fukui/Wirth))
+Nop is structured programming language without operators. (forked [Nor](https://github.com/code4fukui/Nor))
 
-The source file extension for Wirth is ".nor", and the MIME type will is "text/nor".
+The source file extension for Wirth is ".nop", and the MIME type will is "text/nop".
 
-- Runtime on web [Nor Playground](https://code4fukui.github.io/Nor/)
-- Embedded in HTML [Nor on web](https://code4fukui.github.io/Nor/norweb.html)
+- Runtime on web [Nop Playground](https://code4fukui.github.io/Nop/)
+- Embedded in HTML [Nop on web](https://code4fukui.github.io/Nop/nopweb.html)
 ```html
-<script type="module" src="https://code4fukui.github.io/Nor/web.js"></script>
-<script type="text/nor">
-print 1 nor 0
+<script type="module" src="https://code4fukui.github.io/Nop/web.js"></script>
+<script type="text/nop">
+print 1
 </script>
 ```
 
-- CLI(Command Line Interface): calculation BMI [examples/add.nor](examples/add.nor)
+- CLI(Command Line Interface): calculation BMI [examples/add.nop](examples/add.nop)
 ```sh
-deno -A https://code4fukui.github.io/Nor/cli.js examples/add.nor
+deno -A https://code4fukui.github.io/Nop/cli.js examples/add.nop
 ```
 
-- app for debugging [nor2js](https://code4fukui.github.io/Nor/nor2js.html)
+- app for debugging [nop2js](https://code4fukui.github.io/Nop/nop2js.html)
 
 ## 1. Variables and Values
 
-A variable name consists of alphanumeric characters starting with a letter, along with underscores (_) or local characters. However, reserved words (such as nor, print, input, if, else, elseif, endif, loop, break, function, end, return) cannot be used as variable names.
+A variable name consists of alphanumeric characters starting with a letter, along with underscores (_) or local characters. However, reserved words (such as nop, print, input, if, else, elseif, endif, loop, break, function, end, return) cannot be used as variable names.
 
 - ex: n, sum, points
 
@@ -72,16 +72,7 @@ To assign values entered from external input, you can write the following statem
 - ex: x = input()
 - ex: x = input("Please enter any number between 0 and 100.")
 
-## 4. Operations
-
-Only one arithmetic operation "nor".
-
-- ex: val = 0 nor 0 (The value 1 is assigned to val.)
-- ex: val = 0 nor 1 (The value 0 is assigned to val.)
-- ex: val = 1 nor 0 (The value 0 is assigned to val.)
-- ex: val = 1 nor 1 (The value 0 is assigned to val.)
-
-## 5. Conditional Statements
+## 4. Conditional Statements
 
 Conditional statements switch the execution flow based on whether a condition is true or false.
 
@@ -96,8 +87,8 @@ endif
 ex:
 ```
 if x
-  x = x nor 1
-  y = y nor 1
+  x = x nop 1
+  y = y nop 1
 endif
 ```
 
@@ -114,9 +105,9 @@ endif
 ex:
 ```
 if a
-  x = x nor 1
+  x = x nop 1
 else
-  x = x nor 0
+  x = x nop 0
 endif
 ```
 
@@ -135,15 +126,15 @@ endif
 ex:
 ```
 if a
-  x = x nor 1
+  x = x nop 1
 elseif b
-  y = y nor 1
+  y = y nop 1
 else
-  y = y nor 0
+  y = y nop 0
 endif
 ```
 
-### 6. Loop Statements
+### 5. Loop Statements
 
 A loop statement repeatedly executes the <process>.
 
@@ -165,7 +156,7 @@ loop
 next
 ```
 
-## 7. Functions
+## 6. Functions
 
 A function is defined as follows.
 
@@ -184,7 +175,7 @@ Variables defined outside a function can be referenced, but cannot be assigned a
 ex: "print_not(n)" that displays the value not n
 ```
 function print_not(n)
-  print n nor n
+  print n nop n
 end
 ```
 
@@ -193,11 +184,11 @@ Functions can be defined to return a value using "return". If "return" is used w
 ex: "or(a, b)" that returns the value the a or b by 1bit
 ```
 function or(a, b)
-  return not(a nor b)
+  return not(a nop b)
 end
 ```
 
-## 8. Comment
+## 7. Comment
 
 - In a single line, any text following "#" is considered a comment and is not executed as part of the code.
 

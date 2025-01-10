@@ -168,49 +168,11 @@ export class Runtime {
       } else if (cmd.type == "WhileStatement") {
         try {
           for (let i = 0;; i++) {
-            const cond = this.calcExpression(cmd.test, scope);
-            if (!cond) break;
-            this.runBlock(cmd.body, scope);
-            if (i >= MAX_LOOP) {
-              //throw new Error(MAX_LOOP + "回の繰り返し上限に達しました");
-              throw new Error("reached the maximum count : " + MAX_LOOP);
-            }
-          }
-        } catch (e) {
-          if (!(e instanceof Break)) {
-            throw e;
-          }
-        }
-      } else if (cmd.type == "DoWhileStatement") {
-        try {
-          for (let i = 0;; i++) {
-            this.runBlock(cmd.body, scope);
-            const cond = this.calcExpression(cmd.test, scope);
-            if (!cond) break;
-            if (i >= MAX_LOOP) {
-              //throw new Error(MAX_LOOP + "回の繰り返し上限に達しました");
-              throw new Error("reached the maximum count : " + MAX_LOOP);
-            }
-          }
-        } catch (e) {
-          if (!(e instanceof Break)) {
-            throw e;
-          }
-        }
-      } else if (cmd.type == "ForStatement") {
-        if (cmd.init) {
-          this.runBlock(cmd.init, scope);
-        }
-        try {
-          for (let i = 0;; i++) {
             if (cmd.test) {
               const cond = this.calcExpression(cmd.test, scope);
               if (!cond) break;
             }
             this.runBlock(cmd.body, scope);
-            if (cmd.update) {
-              this.runBlock(cmd.update, scope);
-            }
             if (i >= MAX_LOOP) {
               //throw new Error(MAX_LOOP + "回の繰り返し上限に達しました");
               throw new Error("reached the maximum count : " + MAX_LOOP);
@@ -276,15 +238,6 @@ export class Runtime {
     } else if (ast.type == "ArrayExpression") {
       const ar = ast.elements.map(i => this.calcExpression(i, scope));
       return ar;
-    } else if (ast.type == "BinaryExpression" || ast.type == "LogicalExpression") {
-      const n = this.calcExpression(ast.left, scope);
-      const m = this.calcExpression(ast.right, scope);
-      const op = ast.operator;
-      if (op == "nor") {
-        return n || m ? 0 : 1;
-      } else {
-        throw new Error("unsupported operator : " + op);
-      }
     } else if (ast.type == "CallExpression") {
       const name = ast.callee.name;
       if (name == "input") {

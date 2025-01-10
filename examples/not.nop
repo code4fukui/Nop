@@ -1,6 +1,10 @@
 # 2. not
 function not(a)
-  return a nor a
+  if a
+    return 0
+  else
+    return 1
+  endif
 end
 
 print not(0)

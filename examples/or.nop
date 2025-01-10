@@ -1,0 +1,23 @@
+# 3. or
+function not(a)
+  if a
+    return 0
+  else
+    return 1
+  endif
+end
+
+function or(a, b)
+  if a
+    return 1
+  elseif b
+    return 1
+  else
+    return 0
+  endif
+end
+
+print or(0, 0)
+print or(0, 1)
+print or(1, 0)
+print or(1, 1)

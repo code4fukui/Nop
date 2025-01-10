@@ -1,32 +1,32 @@
-# Nor - 演算子が1つしかないプログラミング言語
+# Nop - 演算子が1つもないプログラミング言語
 
-![Nor logo](nor-logo.svg)
+![Nop logo](nop-logo.svg)
 
 [English](README.md) / [日本語](README_ja.md)
 
-Norは、演算子として「nor」のみサポートする構造化プログラミング言語です。 ([Wirth](https://github.com/code4fukui/Wirth)をベースに開発されました。)
+Nopは、演算子を持たない構造化プログラミング言語です。 ([Nor](https://github.com/code4fukui/Nor)をベースに開発されました。)
 
-Norのソースファイル拡張子は「.nor」であり、MIMEタイプは「text/nor」となります。
+Nopのソースファイル拡張子は「.nop」であり、MIMEタイプは「text/nop」となります。
 
-- ブラウザで動作する実行環境 [Nor Playground](https://code4fukui.github.io/Nor/)
-- HTMLへの組み込み例 [Nor on web](https://code4fukui.github.io/Nor/norweb.html)
+- ブラウザで動作する実行環境 [Nop Playground](https://code4fukui.github.io/Nop/)
+- HTMLへの組み込み例 [Nop on web](https://code4fukui.github.io/Nop/nopweb.html)
 ```html
-<script type="module" src="https://code4fukui.github.io/Nor/web.js"></script>
-<script type="text/nor">
-print 1 nor 0
+<script type="module" src="https://code4fukui.github.io/Nop/web.js"></script>
+<script type="text/nop">
+print 1
 </script>
 ```
 
-- CLI(Command Line Interface): 足し算 [examples/add.nor](examples/add.nor)
+- CLI(Command Line Interface): 足し算 [examples/add.nop](examples/add.nop)
 ```sh
-deno -A https://code4fukui.github.io/Nor/cli.js examples/add.nor
+deno -A https://code4fukui.github.io/Nop/cli.js examples/add.nop
 ```
 
-- デバッグ用アプリ [nor2js](https://code4fukui.github.io/Nor/nor2js.html)
+- デバッグ用アプリ [nop2js](https://code4fukui.github.io/Nop/nop2js.html)
 
 ## 1. 変数と値
 
-変数名は、英字で始まる英数字と「_」や日本語の並びです。ただし、予約語（nor, print, input, if, else, elseif, endif, loop, break, function, end, return）は変数名として使用できません。
+変数名は、英字で始まる英数字と「_」や日本語の並びです。ただし、予約語（print, input, if, else, elseif, endif, loop, break, function, end, return）は変数名として使用できません。
 
 - 例: n, sum, points, 得点
 
@@ -41,7 +41,6 @@ deno -A https://code4fukui.github.io/Nor/cli.js examples/add.nor
 数値は10進法で表します。文字列は、文字の並びを「"」でくくって表します。
 
 - 例: 100
-- 例: 99.999
 - 例: "見つかりました"
 - 例: "It was found."
 
@@ -62,7 +61,7 @@ print s[0],s[2] # A C と表示される
 - 例: print "(", x, ",", y, ")" （xが5、yが−1のとき、「( 5 , -1 )」と表示されます。）
 - 例: print （1行空きます。）
 
-## 3 代入文
+## 3. 代入文
 
 代入文は変数に値を設定します。「=」の左辺に変数または添字付きの配列を、右辺に代入する値を書きます。
 
@@ -75,27 +74,18 @@ print s[0],s[2] # A C と表示される
 
 複数の代入文を、「,」で区切りながら、横に並べることができます。この場合は、代入文は左から順に実行されます。
 
-- 例: sum = n, point = n * (n + 1)
+- 例: a = 1, b = 0
 
 外部から入力された値を代入するために、次のように記述することができます。
 
 - 例: x = input()
 - 例: x = input("0から100までの好きな数を入力してください")
 
-## 4. 演算
+## 4. 条件分岐文
 
-演算子は「nor」のみ使用可能です。
+条件分岐文は、<条件>が0以外かどうかによって、実行する処理を切り替えます。
 
-- 例: val = 0 nor 0 (valには1が代入されます。)
-- 例: val = 0 nor 1 (valには0が代入されます。)
-- 例: val = 1 nor 0 (valには0が代入されます。)
-- 例: val = 1 nor 1 (valには0が代入されます。)
-
-## 5. 条件分岐文
-
-条件分岐文は、<条件>が1かどうかによって、実行する処理を切り替えます。
-
-〈条件〉の値が1のときにある処理を実行し、〈条件〉の値が1ではないときに実行する処理がない場合は、次のように指定します。
+〈条件〉の値が0以外のときにある処理を実行し、〈条件〉の値が0のときに実行する処理がない場合は、次のように指定します。
 
 ```
 if <条件>
@@ -106,12 +96,12 @@ endif
 例:
 ```
 if a
-  x = x nor 1
-  y = y nor 1
+  x = 1
+  y = 0
 endif
 ```
 
-〈条件〉の値が1のときにある処理を実行し、〈条件〉の値が1ではないときに別の処理を実行する場合は、次のように「else」を組み合わせて指定します。
+〈条件〉の値が0以外のときにある処理を実行し、〈条件〉の値が0のときに別の処理を実行する場合は、次のように「else」を組み合わせて指定します。
 
 ```
 if <条件>
@@ -124,9 +114,9 @@ endif
 例
 ```
 if a
-  x = x nor 1
+  x = 0
 else
-  x = x nor 0
+  x = 1
 endif
 ```
 
@@ -145,15 +135,15 @@ endif
 例:
 ```
 if a
-  x = x nor 1
+  x = 0
 elseif b
-  y = y nor 1
+  x = 1
 else
-  y = y nor 0
+  y = 1
 endif
 ```
 
-### 6. 繰返し文
+## 5. 繰返し文
 
 繰返し文は、〈処理〉を繰返し実行します。
 
@@ -175,7 +165,7 @@ loop
 next
 ```
 
-## 7. 機能
+## 6. 機能
 
 機能（関数）には、値を返すものと値を返さないものがあります。
 
@@ -197,7 +187,7 @@ end
 例: 値nの否定を表示する"print_not(n)"の定義例
 ```
 function print_not(n)
-  print n nor n
+  print n nop n
 end
 ```
 
@@ -206,12 +196,12 @@ end
 例: orの演算をする機能"or(a, b)"の定義例
 ```
 function or(a, b)
-  return not(a nor b)
+  return not(a nop b)
 end
 ```
 
 
-## 8. コメント
+## 7. コメント
 
 - 1行内において「#」以降の記述は処理の対象となりません。
 
@@ -230,4 +220,5 @@ n = rnd() # 0以上1未満のランダムな小数をnに代入する
 
 ## reference
 
+- [Nor](https://github.com/code4fukui/Nor)
 - [Wirth](https://github.com/code4fukui/Wirth)

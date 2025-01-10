@@ -15,7 +15,7 @@ const reserved = [
 
 const isNumber = (c) => "0123456789".indexOf(c) >= 0;
 
-export class Nor {
+export class Nop {
   constructor(s, callbackoutput) {
     this.s = s.replaceAll("\r", "");
     this.callbackoutput = callbackoutput;
@@ -534,10 +534,8 @@ export class Nor {
         }
       }
       body.push({
-        type: "ForStatement",
-        init: null,
+        type: "WhileStatement",
         test: null,
-        update: null,
         body: {
           type: "BlockStatement",
           body: then,

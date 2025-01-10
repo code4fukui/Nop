@@ -1,9 +1,9 @@
 import * as t from "https://deno.land/std/testing/asserts.ts";
-import { Nor } from "./Nor.js";
+import { Nop } from "./Nop.js";
 
 const run = (s) => {
   const res = [];
-  const runtime = new Nor(s, (s) => res.push(s));
+  const runtime = new Nop(s, (s) => res.push(s));
   runtime.run();
   return res;
 };
