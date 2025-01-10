@@ -26,7 +26,7 @@ deno -A https://code4fukui.github.io/Nop/cli.js examples/add.nop
 
 ## 1. Variables and Values
 
-A variable name consists of alphanumeric characters starting with a letter, along with underscores (_) or local characters. However, reserved words (such as nop, print, input, if, else, elseif, endif, loop, break, function, end, return) cannot be used as variable names.
+A variable name consists of alphanumeric characters starting with a letter, along with underscores (_) or local characters. However, reserved words (such as print, input, if, else, elseif, endif, loop, break, function, end, return) cannot be used as variable names.
 
 - ex: n, sum, points
 
@@ -86,9 +86,9 @@ endif
 
 ex:
 ```
-if x
-  x = x nop 1
-  y = y nop 1
+if a
+  x = 1
+  y = 1
 endif
 ```
 
@@ -105,9 +105,9 @@ endif
 ex:
 ```
 if a
-  x = x nop 1
+  x = 1
 else
-  x = x nop 0
+  x = 0
 endif
 ```
 
@@ -126,11 +126,11 @@ endif
 ex:
 ```
 if a
-  x = x nop 1
+  x = 0
 elseif b
-  y = y nop 1
+  x = 1
 else
-  y = y nop 0
+  y = 1
 endif
 ```
 
@@ -175,7 +175,11 @@ Variables defined outside a function can be referenced, but cannot be assigned a
 ex: "print_not(n)" that displays the value not n
 ```
 function print_not(n)
-  print n nop n
+  if n
+    print 0
+  elseif
+    print 1
+  endif
 end
 ```
 
@@ -184,7 +188,12 @@ Functions can be defined to return a value using "return". If "return" is used w
 ex: "or(a, b)" that returns the value the a or b by 1bit
 ```
 function or(a, b)
-  return not(a nop b)
+  if a
+    return 1
+  elseif b
+    return 1
+  endif
+  return 0
 end
 ```
 

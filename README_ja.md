@@ -187,7 +187,11 @@ end
 例: 値nの否定を表示する"print_not(n)"の定義例
 ```
 function print_not(n)
-  print n nop n
+  if n
+    print 0
+  elseif
+    print 1
+  endif
 end
 ```
 
@@ -196,10 +200,14 @@ end
 例: orの演算をする機能"or(a, b)"の定義例
 ```
 function or(a, b)
-  return not(a nop b)
+  if a
+    return 1
+  elseif b
+    return 1
+  endif
+  return 0
 end
 ```
-
 
 ## 7. コメント
 
