@@ -1,6 +1,6 @@
 # Nop - no operators programming language
 
-![Nop logo](nop-logo.svg)
+![Nop logo](nop-logo.svg?v2)
 
 [English](README.md) / [日本語](README_ja.md)
 

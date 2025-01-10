@@ -1,6 +1,6 @@
 # Nop - 演算子が1つもないプログラミング言語
 
-![Nop logo](nop-logo.svg)
+![Nop logo](nop-logo.svg?v2)
 
 [English](README.md) / [日本語](README_ja.md)
 
