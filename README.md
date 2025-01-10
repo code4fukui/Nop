@@ -42,6 +42,13 @@ Numbers are represented in decimal format.
 
 - ex: 100
 
+When an element index starting from 0 is specified as a subscript for a variable containing a numeric value, it returns the bit at the specified position in binary, treating the least significant bit as position 0.
+
+```
+s = 5
+print s[2], s[1], s[0] # 1 0 1 と表示される
+```
+
 ## 2. Display Statement
 
 The "print" statement is used to display numbers, strings, or variable values. When displaying multiple values, separate them with a comma (,"). If nothing is specified, a blank line is printed.

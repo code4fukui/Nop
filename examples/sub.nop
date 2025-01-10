@@ -41,23 +41,31 @@ function fulladd(a, b, x)
 end
 
 function add(a, b)
-  cs0 = fulladd(a[3], b[3], 0)
-  cs1 = fulladd(a[2], b[2], cs0[0])
-  cs2 = fulladd(a[1], b[1], cs1[0])
-  cs3 = fulladd(a[0], b[0], cs2[0])
-  s = [cs3[1], cs2[1], cs1[1], cs0[1]]
+  cs0 = fulladd(a[0], b[0], 0)
+  cs1 = fulladd(a[1], b[1], cs0[0])
+  cs2 = fulladd(a[2], b[2], cs1[0])
+  cs3 = fulladd(a[3], b[3], cs2[0])
+  s = 0
+  s[0] = cs0[1]
+  s[1] = cs1[1]
+  s[2] = cs2[1]
+  s[3] = cs3[1]
   return s
 end
 
 function complement(a)
-  s = [not(a[0]), not(a[1]), not(a[2]), not(a[3])]
-  return add(s, [0, 0, 0, 1])
+  s = 0
+  s[0] = not(a[0])
+  s[1] = not(a[1])
+  s[2] = not(a[2])
+  s[3] = not(a[3])
+  return add(s, 1)
 end
 
 function sub(a, b)
   return add(a, complement(b))
 end
 
-a = [1, 0, 1, 0] # 10
-b = [0, 1, 1, 1] # 7
+a = 10
+b = 7
 print sub(a, b)

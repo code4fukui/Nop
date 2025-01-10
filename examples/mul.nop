@@ -41,17 +41,25 @@ function fulladd(a, b, x)
 end
 
 function add(a, b)
-  cs0 = fulladd(a[3], b[3], 0)
-  cs1 = fulladd(a[2], b[2], cs0[0])
-  cs2 = fulladd(a[1], b[1], cs1[0])
-  cs3 = fulladd(a[0], b[0], cs2[0])
-  s = [cs3[1], cs2[1], cs1[1], cs0[1]]
+  cs0 = fulladd(a[0], b[0], 0)
+  cs1 = fulladd(a[1], b[1], cs0[0])
+  cs2 = fulladd(a[2], b[2], cs1[0])
+  cs3 = fulladd(a[3], b[3], cs2[0])
+  s = 0
+  s[0] = cs0[1]
+  s[1] = cs1[1]
+  s[2] = cs2[1]
+  s[3] = cs3[1]
   return s
 end
 
 function complement(a)
-  s = [not(a[0]), not(a[1]), not(a[2]), not(a[3])]
-  return add(s, [0, 0, 0, 1])
+  s = 0
+  s[0] = not(a[0])
+  s[1] = not(a[1])
+  s[2] = not(a[2])
+  s[3] = not(a[3])
+  return add(s, 1)
 end
 
 function sub(a, b)
@@ -71,27 +79,43 @@ function iszero(a)
   return 1
 end
 
-function mul2(a)
-  return [a[1], a[2], a[3], 0]
+function equals(a, b)
+  if sub(a[0], b[0])
+    return 0
+  elseif sub(a[1], b[1])
+    return 0
+  elseif sub(a[2], b[2])
+    return 0
+  elseif sub(a[3], b[3])
+    return 0
+  endif
+  return 1
 end
 
+function mul2(a)
+  s = 0
+  s[1] = a[0]
+  s[2] = a[1]
+  s[3] = a[2]
+  return s
+end
 
 function mul(a, b)
-  c = [0, 0, 0, 0]
-  i = [0, 0, 1, 1]
+  c = 0
+  i = 0
   loop
     if b[i]
       c = add(c, a)
     endif
-    if iszero(i)
+    if equals(i, 3)
       break
     endif
-    i = sub(i, [0, 0, 0, 1])
+    i = add(i, 1)
     a = mul2(a)
   next
   return c
 end
 
-a = [0, 1, 0, 1] # 5
-b = [0, 0, 1, 1] # 3
+a = 5
+b = 3
 print mul(a, b)

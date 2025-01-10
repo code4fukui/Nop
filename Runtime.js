@@ -82,21 +82,10 @@ export class Runtime {
     this.runBlock(this.ast, this.scope);
     //console.log(this.vars);
   }
-  binarray2int(a) {
-    let res = 0;
-    let m = 0;
-    for (let i = a.length - 1; i >= 0; i--) {
-      res += a[i] << m;
-      m++;
-    }
-    return res;
-  }
   getArrayIndex(ast, scope) {
     const prop = this.calcExpression(ast, scope);
     if (typeof prop == "number") {
       return prop;
-    } else if (Array.isArray(prop)) {
-      return this.binarray2int(prop);
     } else {
     //if (prop < 0 || typeof prop == "string" && parseInt(prop).toString() != prop) {
       //throw new Error("配列には0または正の整数のみ指定可能です");
@@ -124,7 +113,19 @@ export class Runtime {
             scope.setVar(name, []);
           }
           const idx = this.getArrayIndex(cmd.left.property, scope);
-          scope.getVar(name)[idx] = this.calcExpression(cmd.right, scope);
+          const v = scope.getVar(name);
+          const val = this.calcExpression(cmd.right, scope);
+          if (Array.isArray(v)) {
+            v[idx] = val;
+          } else if (typeof v == "number") {
+            const val2 = val ? 1 : 0;
+            const v2 = (v & ~(1 << idx)) | (val2 << idx);
+            scope.setVar(name, v2);
+          } else if (typeof v == "string") {
+            throw new Error("unsupported assign");
+          } else {
+            throw new Error("unsupported assign");
+          }
         } else {
           //throw new Error("非対応の type です " + cmd.left.type);
           throw new Error("unsupported type : " + cmd.left.type);
@@ -232,8 +233,12 @@ export class Runtime {
       if (typeof v == "string") {
         if (idx >= 0 && idx < v.length) return v[idx];
         return "";
-      } else {
+      } else if (typeof v == "number") {
+        return (v >> idx) & 1;
+      } else if (Array.isArray(v)) {
         return v[idx];
+      } else {
+        throw new Error("can't eval by index");
       }
     } else if (ast.type == "ArrayExpression") {
       const ar = ast.elements.map(i => this.calcExpression(i, scope));

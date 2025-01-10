@@ -41,14 +41,18 @@ function fulladd(a, b, x)
 end
 
 function add(a, b)
-  cs0 = fulladd(a[3], b[3], 0)
-  cs1 = fulladd(a[2], b[2], cs0[0])
-  cs2 = fulladd(a[1], b[1], cs1[0])
-  cs3 = fulladd(a[0], b[0], cs2[0])
-  s = [cs3[1], cs2[1], cs1[1], cs0[1]]
+  cs0 = fulladd(a[0], b[0], 0)
+  cs1 = fulladd(a[1], b[1], cs0[0])
+  cs2 = fulladd(a[2], b[2], cs1[0])
+  cs3 = fulladd(a[3], b[3], cs2[0])
+  s = 0
+  s[0] = cs0[1]
+  s[1] = cs1[1]
+  s[2] = cs2[1]
+  s[3] = cs3[1]
   return s
 end
 
-a = [0, 1, 0, 0] # 4
-b = [0, 1, 0, 1] # 5
+a = 4
+b = 5
 print add(a, b)
